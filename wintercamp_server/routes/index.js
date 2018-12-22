@@ -33,10 +33,19 @@ router.post('/login', function(req, res, next) {
       });
     }
     else {
-      res.send({
-       code:1,
-       result:data
-     })
+      if(data.length>0){
+        res.send({
+         code:1,
+         result:data
+       })
+      }
+      else {
+        res.send({
+         code:0,
+         error:"用户不存在"
+       })
+      }
+
    }
   })
 });
@@ -59,6 +68,25 @@ router.post('/answer',function(req,res,next){
     }
   })
 })
-//小组账号
-
+//角色选择
+router.post('/role',function(req,res,next){
+  var id = req.body.id;
+  var role =  req.body.role;
+  console.log(id,role);
+  wintercamp.update({_id:id},{'role':role},function(err,data){
+    if(err){
+      res.send({
+        code:0,
+        error:err
+      });
+    }
+    else {
+      res.send({
+        code:1,
+        result:data,
+        _id:id
+      });
+    }
+  })
+})
 module.exports = router;

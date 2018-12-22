@@ -9,6 +9,7 @@ var wintercampSchema = new Schema ({
   direct:String,
   devices:String,
   group:Number,
-  isAns:String
+  isAns:String,
+  role:String
 });
 module.exports = mongoose.model('wintercamp',wintercampSchema);
